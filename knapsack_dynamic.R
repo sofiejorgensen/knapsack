@@ -10,75 +10,51 @@
   # NOTE: The array "v" and array "w" are assumed to store all relevant values
   # starting at index 1.
 
+
 knapsack_dynamic <- function(x, W) {
   n <- nrow(x)
   w <- x$w
   v <- x$v
   elements <- c()
+  value <- matrix(NA, nrow = n+1, ncol = W+1)
   
-  value <- matrix(1, nrow = n, ncol = W)
-  
-  # value[1,] <- -1
-  
-  # Define function m so that it represents the maximum value we can get
-  # under the condition: use first i items, total weight limit is j
-  m <- function(i, j) {
-    if (i == 0 || j <= 0) {
-      value[i, j] <- 0
-      return(value)
-    }
-    
-    if (value[i - 1, j] == -1) {
-      value[i - 1, j] <- m(i - 1, j)
-    }
-    
-    if (w[i] > j) {
-      value[i, j] <- m(i - 1, j)
-    }
-    else {
-      if (value[i - 1, j - w[i]] == -1) {
-        value[i - 1, j - w[i]] <- m(i - 1, j - w[i])
-      }
-      value[i, j] <- max(value[i - 1, j], value[i - 1, j - w[i]] + v[i])
-      elements[i] <- i
-      return(value)
-    }
+  for (j in 0:W+1) {
+    value[1,j] <- 0
   }
   
-  value <- m(n,W)
-  return(list("value" = value, "elements" = elements))
+  for (i in 2:(n+1)){
+    for (j in 0:W+1) {
+      
+      # if (is.na(value[i-1, j])) {
+      #   value[i-1, j] <- value[i-1,j]
+      # }
+      
+      if (w[i-1] > j) {
+        value[i,j] <- value[i-1,j]
+      } else {
+        value[i,j] <- max(value[i-1, j], value[i-1, j-w[i-1]]+v[i-1])
+      }
+    }
+  }
+  return(value)
 }
 
-set.seed(42)
-n <- 2000
+
 knapsack_objects <-
   data.frame(
-    w = sample(1:4000, size = n, replace = TRUE),
-    v = runif(n = n, 0, 10000)
+    v = c(10,40,30,50),
+    w = c(5,4,6,3)
   )
-W <- 2000
+W <- 10
 
-knapsack_dynamic(x = knapsack_objects[1:8,], W = W)# recursive
-
-   
-   ## pseudo code below
-    # if i == 0 or j <= 0 then:
-    #   value[i, j] = 0
-    # return
-    # 
-    # if (value[i-1,j] == -1) then:     # m[i-1, j] has not been calculated, we have to call function m
-    #   value[i-1, j] = m(i-1,j)         
-    # 
-    # 
-    # if w[i] > j then:                     # item cannot fit in the bag (THIS WAS MISSING FROM THE PREVIOUS ALGORITHM)
-    #   value[i, j] = value[i-1, j]
-    # 
-    # else: 
-    #   if (value[i-1, j-w[i]] == -1) then:     #m[i-1,j-w[i]] has not been calculated, we have to call function m
-    #       value[i-1, j-w[i]] = m(i-1, j-w[i])
-    # value[i, j] = max(value[i-1,j], value[i-1, j-w[i]] + v[i])
-    # 
+knapsack_dynamic(knapsack_objects, W)
 
 
+knapsack_objects <-
+  data.frame(
+    w = c(23, 26, 20, 18, 32, 27, 29, 26, 30, 27),
+    v = c(505, 352, 458, 220, 354, 414, 498, 545, 473, 543)
+  )
+W <- 67
 
-
+knapsack_dynamic(knapsack_objects, W)
