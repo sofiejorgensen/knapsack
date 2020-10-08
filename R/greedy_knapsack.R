@@ -7,14 +7,8 @@
 #' @export
 #'
 #' @examples
-#' knapsack_objects <-
-#' data.frame(
-#'   v = c(10,40,30,50),
-#'   w = c(5,4,6,3)
-#' )
-#' W <- 10
-#' 
-#' greedy_knapsack((knapsack_objects, W)
+#' data(knapsack_objects)
+#' greedy_knapsack(x = knapsack_objects, W = 3500)
 greedy_knapsack <-
 function(x, W){
   stopifnot("x is not a data.frame." = is.data.frame(x))
