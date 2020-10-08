@@ -18,12 +18,6 @@ a list with max value and corresponding elements
 Brute Force
 }
 \examples{
-knapsack_objects <-
-data.frame(
-  v = c(10,40,30,50),
-  w = c(5,4,6,3)
-)
-W <- 10
-
-brute_force_knapsack((knapsack_objects, W)
+data(knapsack_objects)
+brute_force_knapsack((x = knapsack_objects[1:8,], W = 3500)
 }

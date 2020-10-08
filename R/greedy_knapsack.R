@@ -20,7 +20,7 @@ function(x, W){
   df <- data.frame(object = 1:length(frac), frac = frac, v = x$v, w = x$w)
   # Sort in decreasing order
   df_sorted <- df %>% 
-    arrange(desc(frac))
+    dplyr::arrange(desc(frac))
   S1 <- df_sorted[cumsum(df_sorted$w) <= W,]
   S2 <- df_sorted[cumsum(df_sorted$w) > W,][1,]
   if(sum(S1$v) >= S2$v){

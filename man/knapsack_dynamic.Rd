@@ -18,12 +18,6 @@ a list with max value and corresponding elements
 Dynamic Programming
 }
 \examples{
-knapsack_objects <-
-data.frame(
-  v = c(10,40,30,50),
-  w = c(5,4,6,3)
-)
-W <- 10
-
-knapsack_dynamic((knapsack_objects, W)
+data(knapsack_objects)
+knapsack_dynamic((x = knapsack_objects[1:8,], W = 3500)
 }
