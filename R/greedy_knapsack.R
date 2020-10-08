@@ -32,5 +32,5 @@ function(x, W){
       elements <- S2$object
     }
   }
-  return(list(value = round(value), elements = elements))
+  return(list(value = round(value), elements = elements, 30))
 }

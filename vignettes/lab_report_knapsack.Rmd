@@ -17,11 +17,14 @@ knitr::opts_chunk$set(
 # The Knapsack Package
 ```{r setup}
 library(knapsack)
+library(tidyverse)
 ```
 
 This vignette will examine the knapsack package that provides three different functions for solving the well-known discrete optimization problem called the knapsack problem, which can be formulated as follows: Imagine a knapsack that can carry a bunch of objects $i = 1,...,n$ up to a limited weight $W$, where each object has a weight $w_i$ and a value $v_i$. The task is to add objects to the knapsack and maximize the value without exceeding the limited weight. These three approaches whose functionality will be demonstrated are brute force search, dynamic programming and greedy heuristics, taking a \code{data.frame} and a knapsack weight \code{W} as parameters. 
 
-The knapsack package contains preloaded data set with 2000 knapsack objects, ready to be optimized by one of the three functions. 
+## Settings
+
+The knapsack package contains a preloaded data set with 2000 knapsack objects, ready to be optimized by one of the three functions. 
 
 ```{r}
 head(knapsack_objects)
@@ -42,18 +45,43 @@ obj_500 <- knapsack_obj(500)
 obj_1000000 <- knapsack_obj(1000000)
 ```
 
+In the upcoming sections, we will set the limited weight to $W=3500$. Also, we will be using the \code{proc.time} function to measure the running time of each function. 
 
 ## Brute force search
 
-Brute force search goes through every single combination of items in order to maximize the value. The method guarantees that the value is maximized, but then you have to accept the complexity $0(2^n)$.
+Brute force search goes through every single combination of objects to be able to maximize the value. The method guarantees that the value is maximized, but then you have to accept the complexity $0(2^n)$. Let us start by using the function \code{brute_force_knapsack()} with $n=16$ knapsack objects. 
 
 ```{r}
-
+# Brute force search with n = 16
+ptm <- proc.time()  
+brute_force_knapsack(x = obj_16, W = 3500)
+proc.time() - ptm
 ```
+
 
 ## Dynamic programming
 
+We can benefit from the fact that the weights are discrete in this setup. This enables us to iterate over all possible values of $w$, to obtain the same results as the brute force, but with complexity $O(Wn)$.
+
+```{r}
+# Dynamic programming n = 500
+ptm <- proc.time()
+knapsack_dynamic(x = obj_16, W = 3500)
+proc.time() - ptm
+```
+
 ## Greedy heuristics
+
+In contrast to the already explained algorithms, the greedy heuristics will return at least 50% of the true maximum value, but reduces the complexity to $O(n log n)$.
+
+```{r}
+# Greedy heuristics with n = 1000000
+ptm <- proc.time()
+greedy_knapsack(x = obj_1000000 , W = 3500)
+proc.time() - ptm
+```
+
+
 
 
 

@@ -23,7 +23,7 @@ Suggests:
     rmarkdown,
     usethis,
     utils
-Imports: dplyr
+Imports: dplyr, tidyverse
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 LazyData: true
