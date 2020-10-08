@@ -30,7 +30,11 @@ function(x, W) {
         subset[i,j] <- 0
       } else {
         value[i,j] <- max(value[i-1, j], value[i-1, j-w[i-1]]+v[i-1])
-        subset[i,j] <- 1
+        if ((w[i-1] <= j) & all(value[i-1, j-w[i-1]]+v[i-1] > value[i-1, j])) {
+          subset[i,j] <- 1
+        } else {
+          subset[i,j] <- 0
+        }
       }
     }
   }
@@ -39,16 +43,15 @@ function(x, W) {
   
   K <- W
   for(i in (n+1):2) {
-    print(paste("i:",i))
-    print(paste("K:",K))
+    
     if(subset[i, K+1] == 1) {
-      print(subset)
+
       elements <- append(elements,i-1)
-      print(paste("elements:",elements))
-      print(paste("w[i-1]:", w[i-1]))
+
       K <- K-w[i-1]
-    } else print(paste("subset i=",i,"and K+1=",K+1, "equals 0"))
+    }
   }
   
-  return(list("value" = value, "elements" = elements))
+  return(list("value" = round(value[nrow(value), ncol(value)]), "elements" = sort(elements)))
 }
+
