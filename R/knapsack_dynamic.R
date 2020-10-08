@@ -22,18 +22,18 @@ function(x, W) {
     subset[1,j] <- 0
   }
   
-  for (i in 2:(n+1)){
-    for (j in 0:W+1) {
-      
-      if (w[i-1] > j) {
-        value[i,j] <- value[i-1,j]
-        subset[i,j] <- 0
+  for (i in 2:(n + 1)) {
+    for (j in 0:W + 1) {
+      if (w[i - 1] > j) {
+        value[i, j] <- value[i - 1, j]
+        subset[i, j] <- 0
       } else {
-        value[i,j] <- max(value[i-1, j], value[i-1, j-w[i-1]]+v[i-1])
-        if ((w[i-1] <= j) & all(value[i-1, j-w[i-1]]+v[i-1] > value[i-1, j])) {
-          subset[i,j] <- 1
+        value[i, j] <- max(value[i - 1, j], value[i - 1, j - w[i - 1]] + v[i - 1])
+        if ((w[i - 1] <= j) &
+            all(value[i - 1, j - w[i - 1]] + v[i - 1] > value[i - 1, j])) {
+          subset[i, j] <- 1
         } else {
-          subset[i,j] <- 0
+          subset[i, j] <- 0
         }
       }
     }
