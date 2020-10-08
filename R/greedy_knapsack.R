@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' data(knapsack_objects)
-#' greedy_knapsack(x = knapsack_objects, W = 3500)
+#' greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
 greedy_knapsack <-
 function(x, W){
   stopifnot("x is not a data.frame." = is.data.frame(x))

@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' data(knapsack_objects)
-#' brute_force_knapsack((x = knapsack_objects, W = 3500)
+#' brute_force_knapsack((x = knapsack_objects[1:8,], W = 3500)
 brute_force_knapsack <-
 function(x, W){
   stopifnot("x is not a data.frame." = is.data.frame(x))

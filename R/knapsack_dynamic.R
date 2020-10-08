@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' data(knapsack_objects)
-#' knapsack_dynamic((x = knapsack_objects, W = 3500)
+#' knapsack_dynamic((x = knapsack_objects[1:8,], W = 3500)
 knapsack_dynamic <-
 function(x, W) {
   n <- nrow(x)
