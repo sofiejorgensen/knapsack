@@ -1,0 +1,28 @@
+Package: knapsack
+Type: Package
+Title: Solves knapsack problems using different methods
+Version: 1.0
+Date: 2020-10-08
+Authors@R: c(person("Sofie", "Jörgensen", 
+                    role = c("aut", "cre"), 
+                    email = "sofjo281@student.liu.se"), 
+            person("Henrik", "Olofsson", 
+                    role = "aut", 
+                    email = "henol528@student.liu.se"))
+Author: Sofie Jörgensen,
+        Henrik Olofsson
+Maintainer: Sofie Jörgensen <sofjo281@student.liu.se>, 
+            Henrik Olofsson <henol528@student.liu.se>
+Description: UPDATE ME
+License: GPL-3
+Encoding: UTF-8
+Depends: R (>= 4.0.0)
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown,
+    usethis,
+    utils
+Imports: tidyverse
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr

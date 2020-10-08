@@ -1,13 +1,22 @@
-library("tidyverse")
-
-set.seed(42)
-n <- 2000
-knapsack_objects <-
-  data.frame(w = sample(1:4000, size = n, replace = TRUE), v = runif(n = n, 0, 10000)
-  )
-
-
-greedy_knapsack <- function(x, W){
+#' Greedy Heuristic
+#'
+#' @param x 
+#' @param W 
+#'
+#' @return a list with max value and corresponding elements
+#' @export
+#'
+#' @examples
+#' knapsack_objects <-
+#' data.frame(
+#'   v = c(10,40,30,50),
+#'   w = c(5,4,6,3)
+#' )
+#' W <- 10
+#' 
+#' greedy_knapsack((knapsack_objects, W)
+greedy_knapsack <-
+function(x, W){
   stopifnot("x is not a data.frame." = is.data.frame(x))
   stopifnot("data.frame must contain exactly two variables" = ncol(x)==2)
   stopifnot("data.frame must contain the two variables v and w" = colnames(x) == c("v","w")||colnames(x) == c("w", "v"))
@@ -31,7 +40,3 @@ greedy_knapsack <- function(x, W){
   }
   return(list(value = round(value), elements = elements))
 }
-
-# Test
-greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
-greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)

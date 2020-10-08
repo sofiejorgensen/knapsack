@@ -1,17 +1,22 @@
-
-# 0-1 knapsack, meaning there should only be 0 or 1 copies of each item x_i
-
-
-  # Input:
-  # Values (stored in array v)
-  # Weights (stored in array w)
-  # Number of distinct items (n)
-  # Knapsack capacity (W)
-  # NOTE: The array "v" and array "w" are assumed to store all relevant values
-  # starting at index 1.
-
-
-knapsack_dynamic <- function(x, W) {
+#' Dynamic Programming
+#'
+#' @param x 
+#' @param W 
+#'
+#' @return a list with max value and corresponding elements
+#' @export
+#'
+#' @examples
+#' knapsack_objects <-
+#' data.frame(
+#'   v = c(10,40,30,50),
+#'   w = c(5,4,6,3)
+#' )
+#' W <- 10
+#' 
+#' knapsack_dynamic((knapsack_objects, W)
+knapsack_dynamic <-
+function(x, W) {
   n <- nrow(x)
   w <- x$w
   v <- x$v
@@ -53,23 +58,3 @@ knapsack_dynamic <- function(x, W) {
   
   return(list("value" = value, "elements" = elements))
 }
-
-
-knapsack_objects <-
-  data.frame(
-    v = c(10,40,30,50),
-    w = c(5,4,6,3)
-  )
-W <- 10
-
-knapsack_dynamic(knapsack_objects, W)
-
-
-# knapsack_objects <-
-#   data.frame(
-#     w = c(23, 26, 20, 18, 32, 27, 29, 26, 30, 27),
-#     v = c(505, 352, 458, 220, 354, 414, 498, 545, 473, 543)
-#   )
-# W <- 67
-# 
-# knapsack_dynamic(knapsack_objects, W)
