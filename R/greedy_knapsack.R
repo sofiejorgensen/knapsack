@@ -14,7 +14,7 @@ function(x, W){
   stopifnot("x is not a data.frame." = is.data.frame(x))
   stopifnot("data.frame must contain exactly two variables" = ncol(x)==2)
   stopifnot("data.frame must contain the two variables v and w" = colnames(x) == c("v","w")||colnames(x) == c("w", "v"))
-  stopifnot("v and w must be positive values" = x[,1:2]>0 )
+  stopifnot("v and w must be positive values" = x[,1:2] > 0)
   # Main
   frac <- x$v/x$w
   df <- data.frame(object = 1:length(frac), frac = frac, v = x$v, w = x$w)
@@ -32,5 +32,5 @@ function(x, W){
       elements <- S2$object
     }
   }
-  return(list(value = round(value), elements = elements, 30))
+  return(list(value = round(value), elements = elements))
 }
