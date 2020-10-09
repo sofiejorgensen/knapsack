@@ -2,8 +2,8 @@
 
 library(parallel)
 
-no_of_cores <- detectCores()
-no_of_cores
+nCores <- detectCores()
+cl <- makeCluster(nCores-1)
 
 
 #' Brute Force
@@ -19,33 +19,59 @@ no_of_cores
 #' data(knapsack_objects)
 #' brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 brute_force_knapsack_p <-
-  function(x, W, parallel = FALSE){
+  function(x, W, parallel = FALSE) {
     stopifnot("x is not a data.frame." = is.data.frame(x))
-    stopifnot("data.frame must contain exactly two variables" = ncol(x)==2)
-    stopifnot("data.frame must contain the two variables v and w" = all(colnames(x) %in% c("v","w")))
-    stopifnot("v and w must be positive values" = all(x[,1:2]>0 ))
+    stopifnot("data.frame must contain exactly two variables" = ncol(x) ==
+                2)
+    stopifnot("data.frame must contain the two variables v and w" = all(colnames(x) %in% c("v", "w")))
+    stopifnot("v and w must be positive values" = all(x[, 1:2] > 0))
     # Create all possible subsets
     subset_list <- c()
     value <- 0
-    for (i in 1:nrow(x)){
+    
+    n <- nrow(x)
+    
+    for (i in 1:nrow(x)) {
       subset_list[[i]] <- combn(1:nrow(x), i, simplify = TRUE)
     }
-    # For each object
-    for(i in 1:nrow(x)){
-      # For each subset
-      for(j in 1:ncol(subset_list[[i]])){
-        subset <- subset_list[[i]][,j]
-        temp_w <- sum(x$w[subset])
-        # Compare computed weight with knapsack size W
-        if(temp_w <= W){
-          temp_v <- sum(x$v[subset])
-          # Compare values
-          if(temp_v > value){
-            res <- subset
-            value <- temp_v 
-          }
+
+    res <- data.frame(nrow = n, ncol = 2)
+    
+    # outer foor loop
+    list_applier <-
+      function(i) {
+        k <- ncol(subset_list[[i]])
+        
+        res_list[i] <- mapply(FUN = j_applier, i = i, j = 1:k)
+        # print(paste("i:", i))
+        # print(paste("j:", j))
+        return(value)
+      }
+    
+    # inner for loop
+    j_applier <- function(i, j) {
+      res <- c()
+      subset_tmp <- subset_list[[i]][, j]
+      temp_w <- sum(x$w[subset_tmp])
+      if (temp_w <= W) {
+        temp_v <- sum(x$v[subset_tmp])
+        if (temp_v > value) {
+          res[i,j] <<- subset
+          value[i,j] <<- temp_v
         }
       }
+      return(res)
     }
-    return(list(value = round(value), elements = res))
+    
+
+
+    nCores <- detectCores()
+    cl <- makeCluster(nCores-1)
+    results <- clusterMap(cl = cl, fun = list_applier, i = 1:n)
+    stopCluster(cl)
+
+    print(result)
+  
+    # return(list(value = round(value), elements = res))
   }
+    
