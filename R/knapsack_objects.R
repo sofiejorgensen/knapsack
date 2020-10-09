@@ -4,7 +4,7 @@
 #'
 #' @usage data(knapsack_objects)
 #'
-#' @format A \code{dataframe} of dimensions 2000x2 containing weights \code{w} and values \code{v}.
+#' @format A \code{data.frame} of dimensions 2000x2 containing weights \code{w} and values \code{v}.
 #' 
 #'
 #' @keywords datasets

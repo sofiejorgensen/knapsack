@@ -13,7 +13,7 @@ Author: Sofie Jörgensen,
         Henrik Olofsson
 Maintainer: Sofie Jörgensen <sofjo281@student.liu.se>, 
             Henrik Olofsson <henol528@student.liu.se>
-Description: UPDATE ME
+Description: The knapsack packages provides three different functions for solving the well-known discrete optimization problem called the knapsack problem. The three functions are brute force search, dynamic programming and greedy heuristics, which can be used to add objects (where each object has a weight \code{w} and value \code{v}) to the knapsack and maximize the value without exceeding the limited weight \code{W} of the knapsack. Also, the knapsack package contains a data set with 2000 knapsack objects, to be optimized by one of the three functions. 
 License: GPL-3
 Encoding: UTF-8
 Depends: R (>= 4.0.0)

@@ -21,3 +21,6 @@ Dynamic Programming
 data(knapsack_objects)
 knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
 }
+\references{
+\url{https://en.wikipedia.org/wiki/Knapsack_problem#Dynamic_programming_in-advance_algorithm}
+}

@@ -21,18 +21,15 @@ SHOW SOME FUNCTIONS
 Maintainer: \packageMaintainer{knapsack}
 }
 \references{
-ADD REFERENCES
+\url{https://en.wikipedia.org/wiki/Knapsack_problem}
 }
 
 \keyword{ package }
 
 \examples{
-knapsack_objects <-
-data.frame(
-  v = c(10,40,30,50),
-  w = c(5,4,6,3)
-)
-W <- 10
+data(knapsack_objects)
 
-brute_force_knapsack((knapsack_objects, W)
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
+greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
 }

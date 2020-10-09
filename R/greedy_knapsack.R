@@ -7,13 +7,15 @@
 #' @export
 #'
 #' @examples
+#' library(tidyverse)
 #' data(knapsack_objects)
 #' greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
+#' @references \url{https://en.wikipedia.org/wiki/Knapsack_problem#Greedy_approximation_algorithm}
 greedy_knapsack <-
 function(x, W){
   stopifnot("x is not a data.frame." = is.data.frame(x))
   stopifnot("data.frame must contain exactly two variables" = ncol(x)==2)
-  stopifnot("data.frame must contain the two variables v and w" = colnames(x) == c("v","w")||colnames(x) == c("w", "v"))
+  #stopifnot("data.frame must contain the two variables v and w" = colnames(x) == c("v","w")||colnames(x) == c("w", "v"))
   stopifnot("v and w must be positive values" = all(x[,1:2]>0 ))
   stopifnot("W must be a positive value" = W >= 0)
   # Main
