@@ -15,6 +15,7 @@ function(x, W){
   stopifnot("data.frame must contain exactly two variables" = ncol(x)==2)
   stopifnot("data.frame must contain the two variables v and w" = colnames(x) == c("v","w")||colnames(x) == c("w", "v"))
   stopifnot("v and w must be positive values" = x[,1:2]>0 )
+  stopifnot("W must be a positive value" = W >= 0)
   # Create all possible subsets
   subset_list <- c()
   value <- 0

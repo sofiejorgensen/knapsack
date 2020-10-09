@@ -12,7 +12,7 @@ greedy_knapsack(x, W)
 \item{W}{}
 }
 \value{
-a list with max value and corresponding elements
+a list with at least 50 % of the max value and corresponding elements
 }
 \description{
 Greedy Heuristic
