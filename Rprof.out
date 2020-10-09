@@ -1,0 +1,4 @@
+sample.interval=20000
+"unload_dll" "unload" "cleanup" "load_code" "pkgload::load_all" "load_code" "roxygen2::roxygenise" "force" "withr::with_envvar" "devtools::document" "withCallingHandlers" "suppressPackageStartupMessages" 
+"unload_dll" "unload" "cleanup" "load_code" "pkgload::load_all" "load_code" "roxygen2::roxygenise" "force" "withr::with_envvar" "devtools::document" "withCallingHandlers" "suppressPackageStartupMessages" 
+"unload_dll" "unload" "cleanup" "load_code" "pkgload::load_all" "load_code" "roxygen2::roxygenise" "force" "withr::with_envvar" "devtools::document" "withCallingHandlers" "suppressPackageStartupMessages" 
