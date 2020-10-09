@@ -9,9 +9,9 @@ brute_force_knapsack(x, W, parallel = FALSE)
 brute_force_knapsack(x, W, parallel = FALSE)
 }
 \arguments{
-\item{x}{}
+\item{x}{x \code{data.frame} containing objects with weights \code{w} and values \code{v} as columns.}
 
-\item{W}{}
+\item{W}{max weight of the knapsack}
 }
 \value{
 a list with max value and corresponding elements
@@ -25,7 +25,7 @@ Brute Force
 }
 \examples{
 data(knapsack_objects)
-brute_force_knapsack((x = knapsack_objects[1:8,], W = 3500)
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 data(knapsack_objects)
-brute_force_knapsack((x = knapsack_objects[1:8,], W = 3500)
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 }

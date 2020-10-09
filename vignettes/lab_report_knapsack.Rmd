@@ -1,5 +1,5 @@
 ---
-title: "The Knapsack Package"
+title: "The knapsack package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{lab_report_knapsack}
@@ -25,6 +25,8 @@ This vignette will examine the knapsack package, that provides three different f
 ## Settings
 
 The knapsack package contains a preloaded data set with 2000 knapsack objects, ready to be optimized by one of the three functions. 
+
+
 
 ```{r}
 head(knapsack_objects)

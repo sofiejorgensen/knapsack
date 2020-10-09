@@ -7,9 +7,9 @@
 greedy_knapsack(x, W)
 }
 \arguments{
-\item{x}{}
+\item{x}{\code{data.frame} containing objects with weights \code{w} and values \code{v} as columns.}
 
-\item{W}{}
+\item{W}{max weight of the knapsack}
 }
 \value{
 a list with at least 50 % of the max value and corresponding elements
@@ -19,5 +19,5 @@ Greedy Heuristic
 }
 \examples{
 data(knapsack_objects)
-greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
 }

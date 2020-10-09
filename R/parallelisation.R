@@ -8,21 +8,21 @@ no_of_cores
 
 #' Brute Force
 #'
-#' @param x 
-#' @param W 
+#' @param x x \code{data.frame} containing objects with weights \code{w} and values \code{v} as columns.
+#' @param W max weight of the knapsack
 #'
 #' @return a list with max value and corresponding elements
 #' @export
 #'
 #' @examples
 #' data(knapsack_objects)
-#' brute_force_knapsack((x = knapsack_objects[1:8,], W = 3500)
+#' brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 brute_force_knapsack <-
   function(x, W, parallel = FALSE){
     stopifnot("x is not a data.frame." = is.data.frame(x))
     stopifnot("data.frame must contain exactly two variables" = ncol(x)==2)
     stopifnot("data.frame must contain the two variables v and w" = colnames(x) == c("v","w")||colnames(x) == c("w", "v"))
-    stopifnot("v and w must be positive values" = x[,1:2]>0 )
+    stopifnot("v and w must be positive values" = all(x[,1:2]>0 ))
     # Create all possible subsets
     subset_list <- c()
     value <- 0

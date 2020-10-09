@@ -5,7 +5,7 @@
 \alias{knapsack_objects}
 \title{Knapsack Objects Data}
 \format{
-A \code{dataframe} of dimensions 2000x2 containing weights \code{w} and values\code{v}.
+A \code{dataframe} of dimensions 2000x2 containing weights \code{w} and values \code{v}.
 }
 \usage{
 data(knapsack_objects)

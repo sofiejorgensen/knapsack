@@ -7,9 +7,9 @@
 knapsack_dynamic(x, W)
 }
 \arguments{
-\item{x}{}
+\item{x}{x \code{data.frame} containing objects with weights \code{w} and values \code{v} as columns.}
 
-\item{W}{}
+\item{W}{max weight (discrete) of the knapsack}
 }
 \value{
 a list with max value and corresponding elements
@@ -19,5 +19,5 @@ Dynamic Programming
 }
 \examples{
 data(knapsack_objects)
-knapsack_dynamic((x = knapsack_objects[1:8,], W = 3500)
+knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
 }
