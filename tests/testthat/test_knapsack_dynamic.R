@@ -15,7 +15,7 @@ knapsack_objects_2 <- data.frame(
 
 # Implement test suites
 test_that("Function rejects errounous input.", {
-  # expect_error(knapsack_dynamic(x = knapsack_objects_2[1:8,], 3500))
+  expect_error(knapsack_dynamic(x = knapsack_objects_2[1:8,], 3500))
   expect_error(knapsack_dynamic(x = knapsack_objects[1:8,], "3500"))
   expect_error(knapsack_dynamic(x = knapsack_objects[1:8,], W = 3333.3))
   expect_error(knapsack_dynamic(x = list(v = c(10,40,30,50), w = c(5,4,6,3)), W = 10))

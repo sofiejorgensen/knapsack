@@ -14,7 +14,7 @@ knapsack_dynamic <-
 function(x, W) {
   stopifnot("x is not a data.frame." = is.data.frame(x))
   stopifnot("data.frame must contain exactly two variables" = ncol(x)==2)
-  #stopifnot("data.frame must contain the two variables v and w" = colnames(x) == c("v","w")||colnames(x) == c("w", "v"))
+  stopifnot("data.frame must contain the two variables v and w" = all(colnames(x) %in% c("v","w")))
   stopifnot("v and w must be positive values" = all(x[,1:2]>0 ))
   stopifnot("W must be a discrete value" = W%%1 == 0)
   stopifnot("W must be a positive value" = W >= 0)

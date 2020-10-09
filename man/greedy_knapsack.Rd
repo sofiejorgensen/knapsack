@@ -18,7 +18,6 @@ a list with at least 50 % of the max value and corresponding elements
 Greedy Heuristic
 }
 \examples{
-library(tidyverse)
 data(knapsack_objects)
 greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
 }

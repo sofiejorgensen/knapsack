@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(knapsack)
-library(tidyverse)
 options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
