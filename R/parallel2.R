@@ -1,5 +1,5 @@
 brute_force_knapsack_p <- function(x, W) {
-  
+
   n <- nrow(x)
   
   subset_list <- c()
@@ -11,20 +11,24 @@ brute_force_knapsack_p <- function(x, W) {
   outer <- function(x, W, n, subset_list) {
     #result_df <- as.data.frame(matrix(NA, nrow = n, ncol = 2))
 
-    print(mapply(FUN = inner, i = 1:n, MoreArgs = list(x = x, W = W, subset_list = subset_list)))
+    res_list <- mapply(FUN = inner, i = 1:n, MoreArgs = list(x = x, W = W, subset_list = subset_list))
+    
+    return(list(res_list, subset_list[[3]][,48]))
     # colnames(result_df) <-  c("value", "elements")
     
     #return(result_df)
   }
   
   inner <- function(i, x, W, subset_list) {
+    
     subset <- subset_list[[i]]
     j <- ncol(subset)
 
     val_calc <- function(x, W, subset, j) {
+      #browser()
       temp_w <- sum(x[["w"]][subset[,j]])
       if (temp_w <= W) {
-        return(sum(x[["v"]][subset]))
+        return(sum(x[["v"]][subset[,j]]))
       } else {
         return(0)
       }
@@ -47,4 +51,10 @@ brute_force_knapsack_p <- function(x, W) {
 
 }
 
-brute_force_knapsack_p(knapsack_obj(n=5000)[1:8,],3500)
+knapsack_obj <- function(n){
+  data.frame(w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000))
+}
+set.seed(42)
+x <- knapsack_obj(n=2000)[1:8,]
+brute_force_knapsack_p(x,3500)
+brute_force_knapsack(x,3500)
