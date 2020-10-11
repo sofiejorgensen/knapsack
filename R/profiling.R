@@ -101,28 +101,28 @@
 #     return(list("value" = round(value[nrow(value), ncol(value)]), "elements" = sort(elements)))
 #   }
 # }, interval = 0.001)
-
-system.time(knapsack_dynamic(knapsack_objects[1:100,], 6000))
-system.time(brute_force_knapsack(knapsack_objects[1:18,], 5000))
-system.time(greedy_knapsack(knapsack_objects[1:10000,], 50000000))
-
-Rprof()
-brute_force_knapsack(knapsack_objects[1:24,], 3500, parallel = TRUE)
-Rprof(NULL)
-summaryRprof()
-
-Rprof()
-brute_force_knapsack(knapsack_objects[1:24,], 3500, parallel = FALSE)
-Rprof(NULL)
-summaryRprof()
-
-
-Rprof()
-knapsack_dynamic(knapsack_objects[1:100,], 6000)
-Rprof(NULL)
-summaryRprof()
-
-Rprof()
-greedy_knapsack(knapsack_objects[1:10000,], 10000000)
-Rprof(NULL)
-summaryRprof()
+# 
+# system.time(knapsack_dynamic(knapsack_objects[1:100,], 6000))
+# system.time(brute_force_knapsack(knapsack_objects[1:18,], 5000))
+# system.time(greedy_knapsack(knapsack_objects[1:10000,], 50000000))
+# 
+# Rprof()
+# brute_force_knapsack(knapsack_objects[1:24,], 3500, parallel = TRUE)
+# Rprof(NULL)
+# summaryRprof()
+# 
+# Rprof()
+# brute_force_knapsack(knapsack_objects[1:24,], 3500, parallel = FALSE)
+# Rprof(NULL)
+# summaryRprof()
+# 
+# 
+# Rprof()
+# knapsack_dynamic(knapsack_objects[1:100,], 6000)
+# Rprof(NULL)
+# summaryRprof()
+# 
+# Rprof()
+# greedy_knapsack(knapsack_objects[1:10000,], 10000000)
+# Rprof(NULL)
+# summaryRprof()
