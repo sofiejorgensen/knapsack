@@ -4,12 +4,14 @@
 \alias{brute_force_knapsack}
 \title{Brute Force}
 \usage{
-brute_force_knapsack(x, W)
+brute_force_knapsack(x, W, parallel = FALSE)
 }
 \arguments{
 \item{x}{x \code{data.frame} containing objects with weights \code{w} and values \code{v} as columns.}
 
 \item{W}{max weight of the knapsack}
+
+\item{parallel}{boolean indicating whether or not parallel computing should be used}
 }
 \value{
 a list with max value and corresponding elements

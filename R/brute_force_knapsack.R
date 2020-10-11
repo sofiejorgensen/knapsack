@@ -52,7 +52,7 @@ function(x, W, parallel = FALSE){
         }
       }
       
-      val_vector <- mapply(fun = val_calc, j=1:j, MoreArgs = list(x, W, subset))
+      val_vector <- mapply(FUN = val_calc, j=1:j, MoreArgs = list(x, W, subset))
       
       value <- max(unlist(val_vector))
       elements <- which(max(unlist(val_vector)) ==  val_vector)
@@ -95,7 +95,7 @@ function(x, W, parallel = FALSE){
       return(list(value,elements))
     }
     
-    no_cores <- parallel::detectCores() - 
+    no_cores <- parallel::detectCores() - 1
     cl <- parallel::makeCluster(no_cores, setup_strategy = "sequential")
     # doParallel::registerDoParallel(cl)
     
