@@ -33,16 +33,13 @@ brute_force_knapsack_p <- function(x, W) {
       }
     }
     
-    library(parallel)
-    no_cores <- detectCores() - 1
-    library(doParallel)
+    no_cores <- parallel::detectCores() - 1
     cl <- parallel::makeCluster(no_cores, setup_strategy = "sequential")
-    registerDoParallel(cl)
+    doParallel::registerDoParallel(cl)
     
-    
-    clusterExport(cl = cl, varlist = c("subset", "x", "W"), envir=environment())
-    val_vector <- clusterMap(cl, fun = val_calc, j=1:j, MoreArgs = list(x, W, subset))
-    stopCluster(cl)
+    parallel::clusterExport(cl = cl, varlist = c("subset", "x", "W"), envir=environment())
+    val_vector <- parallel::clusterMap(cl, fun = val_calc, j=1:j, MoreArgs = list(x, W, subset))
+    parallel::stopCluster(cl)
     
     value <- max(unlist(val_vector))
     elements <- which(max(unlist(val_vector)) ==  val_vector)
@@ -60,7 +57,7 @@ knapsack_obj <- function(n){
 set.seed(42)
 x <- knapsack_obj(n=2000)[1:8,]
 df <- brute_force_knapsack_p(x,3500)
-
+df
 
 
 

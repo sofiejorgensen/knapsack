@@ -67,7 +67,7 @@ brute_force_knapsack_p <-
 
     nCores <- detectCores()
     cl <- makeCluster(nCores-1)
-    results <- clusterMap(cl = cl, fun = list_applier, i = 1:n)
+    # results <- clusterMap(cl = cl, fun = list_applier, i = 1:n)
     stopCluster(cl)
 
     print(result)
