@@ -42,3 +42,7 @@ vignettes/*.pdf
 *.Rproj
 .Rproj.user
 inst/doc
+
+# Profiling file
+Rprof.out
+
