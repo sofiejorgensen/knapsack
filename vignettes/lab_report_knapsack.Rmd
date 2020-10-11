@@ -28,6 +28,7 @@ The knapsack package contains a preloaded data set with 2000 knapsack objects, r
 
 
 ```{r}
+data(knapsack_objects)
 head(knapsack_objects)
 ```
 
