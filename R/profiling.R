@@ -112,7 +112,7 @@
 # summaryRprof()
 # 
 # Rprof()
-# brute_force_knapsack(knapsack_objects[1:24,], 3500, parallel = FALSE)
+# brute_force_knapsack(knapsack_objects[1:18,], 3500, parallel = FALSE)
 # Rprof(NULL)
 # summaryRprof()
 # 

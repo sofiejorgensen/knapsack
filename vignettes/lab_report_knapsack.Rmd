@@ -84,15 +84,14 @@ In contrast to the already explained algorithms, the greedy heuristics will retu
 ```{r}
 # Greedy heuristics with n = 1000000
 ptm <- proc.time()
-greedy_knapsack(x = obj_1000000 , W = 3500)
+gr <- greedy_knapsack(x = obj_1000000 , W = 3500)
+gr$value
+gr$elements[1:20]
 t3 <- proc.time() - ptm
 ```
 
 
 In the final example we used $n = 1000000$ number of objects and the elapsed time is `r t3[3]`. From this we can conclude that it is much more time efficient compared to the other algorithms. The greedy heuristics performed a bit slower for $n = 1000000$ than brute force search for $n=16$. 
-
-
-
 
 
 ## Comparison
@@ -101,18 +100,83 @@ We suggest to use the greedy heuristics if you have a larger data set and accept
 
 ## Test suite 
 
-The implementation of the greedy algorithm returns the same solution as the test suites.
+The implementation of the greedy algorithm returns the same solution as the test suites. Should the implementation of the greedy algorithm allow for the selection of the same item multiple times, the maximum value may be greater than in the 0-1 case. 
 
 
 ## Profiling and optimizing the code
 
-To increase the speed we will profile and optimize the code by using the package `lineprof` to identify bottlenecks. 
+To increase the speed we will profile and optimize the code by using the package `lineprof` to identify bottlenecks. By identifying bottlenecks, code can be rewritten to be more efficient. E.g for loops have been rewritten to apply functions to make the brute force function slightly faster - in some cases the speed increases about x3.
 
-## Rubriks kub (*)
+```{r eval=FALSE}
+Rprof()
+brute_force_knapsack(obj_16, 3500, parallel = FALSE)
+Rprof(NULL)
+summaryRprof()
 
-Hello 
+# $by.self
+#                        self.time self.pct total.time total.pct
+# "<Anonymous>"               0.52    23.21       1.94     86.61
+# "[[.data.frame"             0.46    20.54       0.74     33.04
+# "mapply"                    0.40    17.86       1.94     86.61
+# "[["                        0.32    14.29       1.06     47.32
+# "brute_force_knapsack"      0.30    13.39       2.24    100.00
+# "%in%"                      0.24    10.71       0.24     10.71
 
 
+```
 
+## Parallelize Brute Force Search
+Unfortunately, attempting to parallelize the brute force search does not yield great results regarding the time required to run the function. 
 
+```{r}
+# Brute force search with n = 8 and parallel = TRUE
+ptm <- proc.time()  
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500, parallel = TRUE)
+t1 <- proc.time() - ptm
+t1
+```
 
+By profiling the code, we can identify the bottleneck as functions related to the use of clusters - the more the calculations are split, the higher the overhead.
+
+```{r eval=FALSE}
+# Profiling for brute force search with n = 8 and parallel = TRUE
+Rprof()
+brute_force_knapsack(knapsack_objects[1:8,], 3500, parallel = TRUE)
+Rprof(NULL)
+summaryRprof()
+
+# $by.self
+#                     self.time self.pct total.time total.pct
+# "socketConnection"       1.06    80.30       1.06     80.30
+# "sendData.SOCKnode"      0.20    15.15       0.20     15.15
+# "newPSOCKnode"           0.04     3.03       1.12     84.85
+# "system"                 0.02     1.52       0.02      1.52
+# 
+# $by.total
+#                         total.time total.pct self.time self.pct
+# "brute_force_knapsack"        1.32    100.00      0.00     0.00
+# "newPSOCKnode"                1.12     84.85      0.04     3.03
+# "makePSOCKcluster"            1.12     84.85      0.00     0.00
+# "parallel::makeCluster"       1.12     84.85      0.00     0.00
+# "socketConnection"            1.06     80.30      1.06    80.30
+# "sendData.SOCKnode"           0.20     15.15      0.20    15.15
+# "<Anonymous>"                 0.20     15.15      0.00     0.00
+# "mapply"                      0.20     15.15      0.00     0.00
+# "outer"                       0.20     15.15      0.00     0.00
+# "parallel::clusterMap"        0.20     15.15      0.00     0.00
+# "postNode"                    0.20     15.15      0.00     0.00
+# "sendCall"                    0.20     15.15      0.00     0.00
+# "sendData"                    0.20     15.15      0.00     0.00
+# "staticClusterApply"          0.20     15.15      0.00     0.00
+# "system"                      0.02      1.52      0.02     1.52
+# 
+# $sample.interval
+# [1] 0.02
+# 
+# $sampling.time
+# [1] 1.32
+```
+
+With a different approach or a more efficient transfer of data to the clusters, the calculations could be made faster. For `n` up to 20, the parallel computation does not beat the serial one. Beyond that, both variants are too slow to be practically used.
+
+See the source code for the brute force algorithm for information on the exact implementation.
