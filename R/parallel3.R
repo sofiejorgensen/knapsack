@@ -12,8 +12,10 @@ brute_force_knapsack_p <- function(x, W) {
     #result_df <- as.data.frame(matrix(NA, nrow = n, ncol = 2))
 
     res_list <- mapply(FUN = inner, i = 1:n, MoreArgs = list(x = x, W = W, subset_list = subset_list))
-    
-    return(list(res_list, subset_list[[3]][,48]))
+    # print(as.vector(res_list))
+    # print(is.matrix(res_list))
+    # 
+    return(res_list)
     # colnames(result_df) <-  c("value", "elements")
     
     #return(result_df)
@@ -34,14 +36,22 @@ brute_force_knapsack_p <- function(x, W) {
       }
     }
     
-    # nCores <- detectCores()
-    # cl <- makeCluster(nCores-1)
-    # clusterExport(cl = cl, varlist = c("subset", "x", "W"), envir=environment())
-    # val_vector <- clusterMap(cl, fun = val_calc, j=1:j, MoreArgs = list(x, W, subset))
-    # stopCluster(cl)
+    nCores <- detectCores()
+    cl <- makeCluster(nCores-1)
+    clusterExport(cl = cl, varlist = c("subset", "x", "W"), envir=environment())
+    val_vector <- clusterMap(cl, fun = val_calc, j=1:j, MoreArgs = list(x, W, subset))
+    stopCluster(cl)
+    
+    class(max(unlist(val_vector)))
+    # print(which.max(which(max(unlist(val_vector)) == val_vector)))
+    # print(which.max(max(unlist(val_vector))))
+    return(data.frame("value" = max(unlist(val_vector)), "elements" = which(max(unlist(val_vector)) == val_vector)))
+    
+    # max_df <- data.frame("value" = val_vector[which_j_max]) #"elements" = ************
+    # return(max_df)
     # return(val_calc)
     
-    val_vector <- mapply(FUN = val_calc, j=1:j, MoreArgs = list(x, W, subset))
+    # val_vector <- mapply(FUN = val_calc, j=1:j, MoreArgs = list(x, W, subset))
     
     #kombinera val_vector med elmenten från subset, välj ut max(val)
     #returnera lista med maxvärdet och tillhörande element
