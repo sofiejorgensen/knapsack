@@ -17,6 +17,7 @@ function(x, W, parallel = FALSE){
   stopifnot("data.frame must contain the two variables v and w" = all(colnames(x) %in% c("v","w")))
   stopifnot("v and w must be positive values" = all(x[,1:2]>0 ))
   stopifnot("W must be a positive value" = W >= 0)
+  stopifnot("parallel must be a boolean (TRUE/FALSE)" = is.logical(parallel))
   # Create all possible subsets
   value <- 0
   n <- nrow(x)
