@@ -1,5 +1,5 @@
 ---
-title: "The knapsack package"
+title: "The *knapsack* package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{lab_report_knapsack}
@@ -16,15 +16,17 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(knapsack)
+```
+
+```{r echo = FALSE}
 options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
-This vignette will examine the knapsack package, that provides three different functions for solving the well-known discrete optimization problem called the knapsack problem, which can be formulated as follows: Imagine a knapsack that can carry a bunch of objects $i = 1,...,n$ up to a limited weight $W$, where each object has a weight $w_i$ and a value $v_i$. The task is to add objects to the knapsack and maximize the value without exceeding the limited weight. These three approaches whose functionality will be demonstrated are brute force search, dynamic programming and greedy heuristics, taking a `data.frame` with knapsack objects called `x`and a knapsack weight `W` as parameters.
+This vignette will examine the knapsack package, that provides three different functions for solving the well-known discrete optimization problem called the knapsack problem, which can be formulated as follows: Imagine a knapsack that can carry a bunch of objects $i = 1,...,n$ up to a limited weight $W$, where each object has a weight $w_i$ and a value $v_i$. The task is to add objects to the knapsack and maximize the value without exceeding the limited weight. These three approaches whose functionality will be demonstrated are brute force search, dynamic programming and greedy heuristics, taking a `data.frame` with knapsack objects called `x` and a knapsack weight `W` as parameters.
 
 ## Settings
 
 The knapsack package contains a preloaded data set with 2000 knapsack objects, ready to be optimized by one of the three functions. 
-
 
 
 ```{r}
