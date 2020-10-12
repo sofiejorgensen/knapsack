@@ -21,16 +21,21 @@ function(x, W) {
   n <- nrow(x)
   w <- x$w
   v <- x$v
+  
+  # setting up matrices to hold the results
   subset <- matrix(NA, nrow = n+1, ncol = W+1)
   value <- matrix(NA, nrow = n+1, ncol = W+1)
   
-  for (j in 0:W+1) {
+  # setting up the matrices' first rows with 0's
+  for (j in 1:(W+1)) {
     value[1,j] <- 0
     subset[1,j] <- 0
   }
   
+  # identifying the maximum value for the first i items if the maximum weight (j) is increased by 1 until it reaches W
+  # also extracts a data frame used to identify which subset that gives the maximum value
   for (i in 2:(n + 1)) {
-    for (j in 0:W + 1) {
+    for (j in 1:(W + 1)) {
       if (w[i - 1] > j) {
         value[i, j] <- value[i - 1, j]
         subset[i, j] <- 0
@@ -46,8 +51,8 @@ function(x, W) {
     }
   }
   
+  # extracting the subset from the matrix
   elements <- c()
-  
   K <- W
   for(i in (n+1):2) {
     
