@@ -43,7 +43,7 @@ function(x, W, parallel = FALSE){
       
       subset <- subset_list[[i]]
       j <- ncol(subset)
-      
+      # Calculate values of subset
       val_calc <- function(x, W, subset, j) {
         temp_w <- sum(x[["w"]][subset[,j]])
         if (temp_w <= W) {
@@ -52,10 +52,11 @@ function(x, W, parallel = FALSE){
           return(0)
         }
       }
-      
+      # Calculate value for each combination in subset
       val_vector <- mapply(FUN = val_calc, j=1:j, MoreArgs = list(x, W, subset))
-      
+      # Max value
       value <- max(unlist(val_vector))
+      # Identify elements
       elements <- which(max(unlist(val_vector)) ==  val_vector)
       return(list(value,elements))
     }
@@ -78,7 +79,7 @@ function(x, W, parallel = FALSE){
       
       subset <- subset_list[[i]]
       j <- ncol(subset)
-      
+      # Calculate values of subset
       val_calc <- function(x, W, subset, j) {
         temp_w <- sum(x[["w"]][subset[,j]])
         if (temp_w <= W) {
@@ -87,15 +88,16 @@ function(x, W, parallel = FALSE){
           return(0)
         }
       }
-
+      # Parallelize using cluster
       parallel::clusterExport(cl = cl, varlist = c("subset", "x", "W"), envir=environment())
       val_vector <- parallel::clusterMap(cl, fun = val_calc, j=1:j, MoreArgs = list(x, W, subset))
-      
+      # Max value
       value <- max(unlist(val_vector))
+      # Identify which elements 
       elements <- which(max(unlist(val_vector)) ==  val_vector)
       return(list(value,elements))
     }
-    
+    # Parallelize using cluster
     no_cores <- parallel::detectCores() - 1
     cl <- parallel::makeCluster(no_cores, setup_strategy = "sequential")
     # doParallel::registerDoParallel(cl)
